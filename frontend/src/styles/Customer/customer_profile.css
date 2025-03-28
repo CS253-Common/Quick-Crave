@@ -1,0 +1,485 @@
+/* Customer Profile Page Styles */
+
+/* Base Styles */
+.cp-home-container {
+    position: relative;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Background Styling */
+.cp-main-content {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+.cp-main-content::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-repeat: repeat;
+    background-size: auto;
+    background-position: center;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.cp-main-content::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.05), rgba(255, 177, 66, 0.05));
+    z-index: -1;
+    display: block;
+}
+
+/* Top Navigation */
+.cp-top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    margin-bottom: 30px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.cp-menu-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(248, 248, 248, 0.7);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.cp-menu-btn:hover {
+    background-color: rgba(240, 240, 240, 0.9);
+}
+
+.cp-logo {
+    display: flex;
+    align-items: center;
+}
+
+.cp-logo-image-small {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.cp-logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.cp-red-text {
+    color: #e74c3c;
+}
+
+.cp-yellow-text {
+    color: #ffb142;
+}
+
+/* .cp-user-profile {
+    margin-left: auto;
+} */
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    /* border: 2px solid #622cce; */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    overflow: hidden;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.user-avatar:hover {
+    background-color: rgba(255, 255, 255, 1); /* Slightly brighter on hover */
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+.user-avatar:active {
+    transform: scale(0.95); /* Slight shrink effect on click */
+}
+
+.user-avatar img {
+    width: 125%;
+    height: 125%;
+    object-fit: cover;
+}
+
+/* Profile Container */
+.cp-profile-container {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 30px;
+    margin: 0 20px 30px;
+}
+
+.cp-profile-header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(238, 238, 238, 0.4);
+    padding-bottom: 15px;
+}
+
+.cp-profile-header h1 {
+    font-size: 22px;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cp-profile-info-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 400px;
+}
+
+.cp-profile-photo {
+    width: 280px;
+    height: 280px;
+    border-radius: 100%;
+    overflow: hidden;
+    border: 3px solid rgb(237, 219, 219);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: rgba(245, 245, 245, 0.7);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.cp-profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cp-change-photo-btn {
+    position: absolute;
+    bottom: 45px;
+    right: 45px;
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    transform: translate(100%, 100%);
+}
+
+.cp-profile-photo:hover .cp-change-photo-btn {
+    transform:scale(1.1); /* Scale up by 10% */
+    background-color: #ff3547; /* Darker red on hover */
+    position: absolute;
+}
+
+.cp-profile-field-label {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 5px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.cp-profile-field-value {
+    font-size: 16px;
+    color: #222;
+    font-weight: 600;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(238, 238, 238, 0.4);
+    letter-spacing: 0.3px;
+}
+
+/* Action Buttons */
+.cp-profile-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    justify-content: flex-end;
+}
+
+.cp-profile-btn {
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cp-edit-profile-btn {
+    background-color: #ff4757;
+    color: white;
+}
+
+.cp-edit-profile-btn:hover {
+    background-color: #ff3547;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+}
+
+.cp-change-password-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.cp-change-password-btn:hover {
+    background-color: #43a047;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+/* Recent Orders Section */
+.cp-recent-orders {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 25px;
+    margin: 0 20px 30px;
+}
+
+.cp-recent-orders h2 {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.cp-recent-orders h2:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 3px;
+    background-color: rgba(255, 71, 87, 0.8);
+}
+
+.cp-order-stats {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.cp-stat-card {
+    flex: 1;
+    min-width: 150px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cp-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cp-stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    color: white;
+    font-size: 24px;
+}
+
+.cp-total-orders .cp-stat-icon {
+    background-color: #ff9800;
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.2);
+}
+
+.cp-food-delivery .cp-stat-icon {
+    background-color: #ff4757;
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.2);
+}
+
+.cp-dineout .cp-stat-icon {
+    background-color: #2196F3;
+    box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
+}
+
+.cp-reservations .cp-stat-icon {
+    background-color: #9C27B0;
+    box-shadow: 0 5px 15px rgba(156, 39, 176, 0.2);
+}
+
+.cp-stat-number {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #222;
+}
+
+.cp-stat-label {
+    font-size: 14px;
+    color: #777;
+    font-weight: 500;
+}
+
+/* Favorite Restaurants Section */
+.cp-favorite-restaurants {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 25px;
+    margin: 0 20px 40px;
+}
+
+.cp-favorite-restaurants h2 {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.cp-favorite-restaurants h2:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 3px;
+    background-color: rgba(255, 71, 87, 0.8);
+}
+
+.cp-restaurant-list {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.cp-restaurant-list p {
+    color: #777;
+    font-size: 15px;
+    background-color: rgba(249, 249, 249, 0.4);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px dashed rgba(221, 221, 221, 0.6);
+}
+
+/* Notifications */
+.cp-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    z-index: 9999;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.cp-success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.cp-error {
+    background-color: #f44336;
+    color: white;
+}
+
+.cp-info {
+    background-color: #2196F3;
+    color: white;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .cp-profile-info-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cp-profile-details {
+        width: 100%;
+    }
+    
+    .cp-profile-actions {
+        justify-content: center;
+    }
+    
+    .cp-order-stats {
+        flex-direction: column;
+    }
+    
+    .cp-profile-container,
+    .cp-recent-orders,
+    .cp-favorite-restaurants {
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 20px;
+    }
+}

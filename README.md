@@ -1,7 +1,7 @@
----
+<!-- ---
 title: "\U0001F37D️ Canteen Management WebApp"
 
----
+--- -->
 
 ##  Add to Wallet Button Integration
 

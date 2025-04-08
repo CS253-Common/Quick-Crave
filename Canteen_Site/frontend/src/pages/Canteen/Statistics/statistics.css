@@ -1,0 +1,146 @@
+.statistics-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.statistics-loading {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #666;
+}
+
+.statistics-error {
+    text-align: center;
+    padding: 40px;
+    color: #dc3545;
+    font-size: 16px;
+}
+
+/* Popular Orders Section */
+.popular-orders-section {
+    margin-bottom: 40px;
+}
+
+.popular-orders-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.popular-orders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.popular-order-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.popular-order-card:hover {
+    transform: translateY(-5px);
+}
+
+.popular-order-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.popular-order-card h3 {
+    padding: 15px;
+    margin: 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.order-stats {
+    padding: 0 15px 15px;
+}
+
+.order-stats p {
+    margin: 8px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Recent Orders Section */
+.recent-orders-section {
+    margin-top: 40px;
+}
+
+.recent-orders-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.recent-orders-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.recent-order-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.order-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.order-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.order-status.completed {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.customer-name {
+    font-weight: 500;
+    color: #333;
+    margin: 10px 0;
+}
+
+.dishes-list {
+    margin: 10px 0;
+}
+
+.dishes-list p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.order-total {
+    font-weight: 500;
+    color: #333;
+    margin: 10px 0;
+}
+
+.order-time {
+    color: #666;
+    font-size: 12px;
+    margin: 5px 0 0 0;
+} 

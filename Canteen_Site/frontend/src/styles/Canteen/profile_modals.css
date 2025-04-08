@@ -1,0 +1,352 @@
+/* Modal overlay - covers the entire screen */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 0 20px;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal container */
+.modal-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 25px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #333;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #777;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-modal-btn:hover {
+  color: #ff5252;
+}
+
+/* Form styles */
+.profile-form {
+  padding: 25px;
+}
+
+.form-section {
+  margin-bottom: 25px;
+}
+
+.form-section h3 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #333;
+  font-size: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-group input:focus {
+  border-color: #ff5252;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 82, 82, 0.1);
+}
+
+.time-inputs {
+  display: flex;
+  align-items: center;
+}
+
+.time-inputs select,
+.time-inputs input {
+  flex: 1;
+}
+
+.time-inputs span {
+  margin: 0 10px;
+  color: #666;
+}
+
+/* Error and success messages */
+.error-message, 
+.success-message {
+  margin-bottom: 15px;
+  padding: 12px 15px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  border-left: 4px solid #c62828;
+}
+
+.success-message {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-left: 4px solid #2e7d32;
+}
+
+.error-message i, 
+.success-message i {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+/* Form actions (buttons) */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 20px;
+}
+
+.cancel-btn, 
+.save-btn,
+.select-image-btn {
+  padding: 12px 25px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.save-btn {
+  background-color: #ff5252;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #ff3838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.save-btn:disabled {
+  background-color: #ffb8b8;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.cancel-btn {
+  background-color: #f0f0f0;
+  color: #555;
+}
+
+.cancel-btn:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.select-image-btn {
+  background-color: #6c5ce7;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.select-image-btn:hover {
+  background-color: #5d4dcb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.select-image-btn i {
+  margin-right: 8px;
+}
+
+.fa-spinner {
+  margin-right: 8px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Image upload styling */
+.image-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.image-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 3px solid #ff5252;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.no-image {
+  text-align: center;
+  color: #999;
+}
+
+.no-image i {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.no-image p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.image-upload-info {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.upload-instructions {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #555;
+}
+
+.upload-formats {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.selected-file-name {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.form-hint {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* Checkbox styling */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  accent-color: #ff5252;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .time-inputs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .time-inputs span {
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+  
+  .save-btn, 
+  .cancel-btn,
+  .select-image-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .image-preview {
+    width: 120px;
+    height: 120px;
+  }
+}

@@ -1,0 +1,781 @@
+/* Base Styles */
+.dineout * {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    display: inline-block; /* or flex, depending on your layout */
+}
+.dineout body {
+    background-image: url('../../../public/images/extended_pattern.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.dineout body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: -1;
+}
+
+.dineout .app-container {
+    max-width: 100%;
+    min-height: 100vh;
+    padding-bottom: 80px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Top Navigation */
+/* .dineout .top-nav {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: transparent;
+} */
+
+/* Menu Button Animation */
+.dineout .cs-menu-btn {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dineout .cs-menu-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+}
+
+.dineout .cs-menu-btn:active {
+    transform: scale(0.95);
+}
+
+.dineout .menu-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.dineout .logo-image {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.dineout .red-text {
+    color: #e74c3c;
+}
+
+.dineout .yellow-text {
+    color: #ffb142;
+}
+
+.dineout .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.dineout .user-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dineout .user-avatar img {
+    width: 125%;
+    height: 125%;
+    /* border-radius: 50%; */
+    object-fit: cover;
+}
+
+/* Search Bar */
+.dineout .search-container {
+    position: relative;
+    margin: 15px auto;
+    display: flex;
+    align-items: center;
+    width: 50%;
+    max-width: 600px;
+}
+
+.dineout .search-container svg {
+    position: absolute;
+    left: 15px;
+    color: #777;
+    font-size: 16px;
+    z-index: 1;
+}
+
+.dineout .search-input {
+    width: 100%;
+    padding: 12px 20px 12px 45px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 16px;
+    outline: none;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.dineout .search-input:focus {
+    border-color: #e74c3c;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.1);
+}
+
+/* Category Tabs */
+.dineout .tab-container {
+    display: flex;
+    gap: 10px;
+    width : 20%;
+    /* margin: 15px 20px; */
+    background:#ffdbd7;
+    padding: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.dineout .tab {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    background: none;
+    font-size: 16px;
+    font-style: Poppins;
+    font-weight: 500;
+    font-weight: bold;
+    color: #535353;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dineout .tab.active {
+    background: #e74c3c;
+    color: white;
+    box-shadow: 0 3px 6px rgba(76, 175, 80, 0.2);
+}
+
+/* Food Grid */
+.dineout .food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 0 5%;
+    margin-top: 20px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1400px;
+}
+
+.dineout .food-card {
+    background: rgb(242, 242, 242);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    text-align: left;
+}
+
+.dineout .food-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dineout .food-image {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+
+.dineout .food-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.dineout .food-card:hover .food-image img {
+    transform: scale(1.05);
+}
+
+.dineout .veg-indicator{position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    background-image: url('../../../public/images/veg_icon.png');
+    background-size: cover;
+}
+    
+    
+.dineout .non-veg-indicator {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    background-image: url('../../../public/images/non_veg_icon.png');
+    background-size: cover;
+}
+
+.dineout .veg-indicator {
+    border-color: #4CAF50;
+}
+
+.dineout .non-veg-indicator {
+    border-color: #e74c3c;
+}
+
+.dineout .food-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 15px 15px 5px;
+}
+
+.dineout .food-source {
+    font-size: 14px;
+    color: #777;
+    margin: 0 15px 8px;
+    
+
+}
+
+.dineout .food-price {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    margin: 0 15px 8px;
+}
+
+.dineout .rating-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dineout .rating-badge svg {
+    font-size: 10px;
+}
+
+.dineout .add-button {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.dineout .add-button:hover {
+    transform: scale(1.1);
+    background: #c0392b;
+}
+
+/* Quantity Selector */
+.dineout .quantity-selector {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 2px;
+    border: 1px solid #e1e1e1;
+}
+
+.dineout .quantity-btn {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.dineout .quantity-btn:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+.dineout .quantity-value {
+    margin: 0 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Canteen Grid */
+.dineout .canteen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 0 5%;
+    margin-top: 20px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1400px;
+}
+
+.dineout .canteen-card-link {
+    text-decoration: none;
+    color: inherit;
+    align-items: left;
+    text-align: left;
+}
+
+.dineout .canteen-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    text-align: left;
+    position: relative;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+.dineout .canteen-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dineout .canteen-image {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dineout .canteen-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.dineout .canteen-card:hover .canteen-image img {
+    transform: scale(1.05);
+}
+
+.dineout .canteen-info {
+    padding: 15px;
+    position: relative;
+}
+
+.dineout .canteen-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.dineout .canteen-rating {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dineout .canteen-rating svg {
+    font-size: 10px;
+}
+
+.dineout .canteen-location {
+    font-size: 14px;
+    text-align: left;
+    color: #777;
+    margin-bottom: 8px;
+}
+
+ /* Cart Button */
+ .dineout .cart-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    color: #333;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    z-index: 100;
+    border: 2px solid #eee;
+    text-decoration: none;
+}
+
+.dineout .cart-button:hover {
+    transform: scale(1.1);
+}
+
+.dineout .cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #4CAF50;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+/* Notification */
+.dineout .notification {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: white;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    animation: showNotification 0.3s forwards;
+}
+
+.dineout .notification.success {
+    background-color: #2ecc71;
+}
+
+.dineout .notification.warning {
+    background-color: #f39c12;
+}
+
+.dineout .notification.error {
+    background-color: #e74c3c;
+}
+
+@keyframes showNotification {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .dineout .food-grid,
+    .dineout .canteen-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+        width: 95%;
+        padding: 0 2.5%;
+    }
+    
+    .dineout .navbar {
+        padding: 10px 15px;
+    }
+    
+    .dineout .logo img {
+        height: 30px;
+    }
+    
+    .dineout .logo-text {
+        font-size: 18px;
+    }
+    
+    .dineout .food-name,
+    .dineout .canteen-name {
+        font-size: 16px;
+    }
+    
+    .dineout .food-price {
+        font-size: 14px;
+    }
+    
+    .dineout .food-image,
+    .dineout .canteen-image {
+        height: 120px;
+    }
+    
+    .dineout .canteen-location {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dineout .tab-container {
+        margin: 10px 15px;
+    }
+    
+    .dineout .tab {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    .dineout .search-container {
+        margin: 10px 15px;
+    }
+    
+    .dineout .search-input {
+        padding: 10px 15px 10px 40px;
+        font-size: 14px;
+    }
+    
+    .dineout .food-grid,
+    .dineout .canteen-grid {
+        width: 100%;
+        padding: 0 10px;
+        gap: 10px;
+    }
+}
+
+/* Side Menu Overlay */
+.dineout .cs-side-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.dineout .cs-side-menu-overlay.active {
+    display: block;
+}
+
+.dineout .cs-side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100%;
+    background-color: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+.dineout .cs-side-menu.active {
+    left: 0;
+}
+
+.dineout .cs-side-menu-header {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.dineout .cs-close-menu-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+}
+
+.dineout .cs-menu-user-info {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.dineout .cs-menu-user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.dineout .cs-menu-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dineout .cs-menu-user-name {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.dineout .cs-menu-user-email {
+    margin: 5px 0 0;
+    font-size: 13px;
+    color: #777;
+}
+
+.dineout .cs-side-menu-content {
+    padding: 20px 0;
+}
+
+.dineout .cs-menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dineout .cs-menu-item {
+    margin: 0;
+}
+
+.dineout .cs-menu-item a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.dineout .cs-menu-item a:hover {
+    background-color: #f5f5f5;
+    color: #ff4757;
+}
+
+.dineout .cs-menu-item a svg {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.dineout .cs-menu-item.active a {
+    color: #ff4757;
+    background-color: rgba(255, 71, 87, 0.1);
+    border-left: 3px solid #ff4757;
+}
+
+.favorite-button.active {
+    color: red;
+  }
+
+/* Food card actions container */
+.food-card-actions {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  /* Favorite button styles - now positioned above the add button */
+  .favorite-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #ccc;
+    transition: all 0.3s ease;
+    margin-bottom: 5px;
+    margin-right: 80%;
+    padding: 5px;
+  }
+  
+  .favorite-button:hover {
+    color: #ff4757;
+    transform: scale(1.1);
+  }
+  
+  .favorite-button.active {
+    color: #ff4757;
+  }

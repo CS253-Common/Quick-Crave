@@ -1,0 +1,663 @@
+/* Global reset to remove white margins */
+body, html {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden;
+    background-color: transparent;
+}
+
+/* Override App.js div margin */
+div[style*="marginTop"] {
+    margin-top: 0 !important;
+}
+
+/* Main container - removing any top margin and making it full viewport */
+.canteen-home-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: transparent;
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+    top: 0 !important; 
+}
+
+/* Fix for the Router div in App.js */
+.canteen-home-container div[style*="marginTop"] {
+    margin-top: 0 !important;
+}
+
+/* Top Banner / Background image - ensure it starts at the very top */
+.canteen-home-container::before {
+    content: '';
+    position: fixed; /* Change to fixed to ensure it starts at the top of viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 320px;
+    background-image: url('../../../public/images/home_background.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Side Menu Overlay */
+.side-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.side-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 999;
+    transition: left 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.side-menu.active {
+    left: 0;
+}
+
+.side-menu-header {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.close-menu-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #555;
+}
+
+.menu-user-info {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.menu-user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-user-details {
+    flex: 1;
+}
+
+.menu-user-name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.menu-user-email {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.side-menu-content {
+    padding: 20px 0;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    margin-bottom: 5px;
+}
+
+.menu-item a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #555;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.menu-item a i {
+    margin-right: 12px;
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.menu-item.active a,
+.menu-item a:hover {
+    background-color: #f5f5f5;
+    color: #e53935;
+}
+
+.menu-item.active a {
+    border-left: 3px solid #e53935;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 0 20px 20px;
+    position: relative;
+    z-index: 1;
+    background-color: #f5f5f5;
+    min-height: calc(100vh - 90px);
+}
+
+/* Top Navigation */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    position: relative;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.menu-logo {
+    width: 30px;
+    height: 30px;
+}
+
+/* Logo Container and Text Styling - Enhanced */
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 8px 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-image {
+    height: 40px;
+    width: auto;
+    margin-right: 8px;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.red-text {
+    color: #e53935;
+}
+
+.yellow-text {
+    color: #ffc107;
+}
+
+.user-profile {
+    position: relative;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Dashboard Cards */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Card Link Styling */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-link:hover {
+    transform: translateY(-5px);
+}
+
+.card-link:hover .dashboard-card {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-link:hover .card-action-btn {
+    background-color: #e53935;
+    color: white;
+}
+
+.dashboard-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.card-title {
+    background-color: transparent;
+    color: #333;
+    margin: 0;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.card-content {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.card-stats {
+    flex: 1;
+    min-width: 120px;
+}
+
+.card-stats p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.card-icon {
+    margin-left: auto;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-action-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    border-color: rgba(255, 255, 255, 1);
+}
+
+.card-title {
+    margin: 0 0 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.card-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background-color: #e53935;
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-top: 15px;
+}
+
+.card-stats {
+    flex: 1;
+}
+
+.card-stats p {
+    margin: 12px 0;
+    font-size: 15px;
+    color: #555;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.card-stats p::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #e53935;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.card-icon {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    border-radius: 12px;
+    background-color: rgba(245, 245, 245, 0.6);
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover .card-icon {
+    transform: scale(1.05);
+    background-color: rgba(245, 245, 245, 0.9);
+}
+
+.card-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover .card-icon img {
+    transform: scale(1.1);
+}
+
+.card-action-btn {
+    width: 40px;
+    height: 40px;
+    background-color: #f5f5f5;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #555;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-action-btn:hover {
+    background: linear-gradient(90deg, #e53935, #ff6f00);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* Trending Section styles */
+.trending-section {
+    margin-top: 30px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #e53935, #fdd835);
+    border-radius: 3px;
+}
+
+.trending-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    position: relative;
+    z-index: 3;
+}
+
+.trending-item {
+    position: relative;
+    flex: 0 0 calc(20% - 16px);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+}
+
+.trending-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border-color: transparent;
+}
+
+.trending-image {
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+}
+
+.trending-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.trending-item:hover .trending-image img {
+    transform: scale(1.1);
+}
+
+.trending-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(229, 57, 53, 0.85);
+    color: #fff;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+@media (max-width: 991px) {
+    .trending-item {
+        flex: 0 0 calc(33.33% - 14px);
+    }
+}
+
+@media (max-width: 768px) {
+    .trending-item {
+        flex: 0 0 calc(50% - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .trending-items {
+        justify-content: center;
+    }
+    
+    .trending-item {
+        flex: 0 0 calc(100% - 20px);
+        max-width: 200px;
+    }
+}
+
+/* Avatar links styles */
+.user-avatar-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.menu-user-avatar-link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Loading states */
+.loading-text {
+    color: #777;
+    font-style: italic;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.error-text {
+    color: #e53935;
+    font-weight: 500;
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+    width: 100%;
+}
+
+.loading-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #2196F3;
+    animation: spin 1s ease-in-out infinite;
+    margin: 10px auto;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Add pattern background to the lower part of the page */
+.main-content:after {
+    content: '';
+    position: absolute;
+    top: 320px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../../public/images/pattern.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6;
+    z-index: -1;
+}
+
+/* Add dark overlay on top of the pattern */
+.main-content:before {
+    content: '';
+    position: absolute;
+    top: 320px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+} 

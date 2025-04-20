@@ -10,59 +10,120 @@ axios.defaults.withCredentials = true;
 const RazorpayButton = ({ onPaymentSuccess, onPaymentFailure }) => {
     const buttonRef = useRef(null);
     const [isRazorpayLoading, setIsRazorpayLoading] = useState(false);
-  
+
     useEffect(() => {
-
-        // console.log("payment ho rha hai");
-
-        const handlePaymentResponse = (event) => {
-            console.log(event);
-            if (event.detail && event.detail.status === 'paid') {
-                // Payment was successful
-                onPaymentSuccess(event.detail);
-            } else {
-                // Payment failed
-                onPaymentFailure(event.detail || {});
-            }
-        };
-
-        if (buttonRef.current) {
-
-            const script = document.createElement('script');
-            script.src = "https://checkout.razorpay.com/v1/payment-button.js";
-            script.async = true;
-            script.dataset.payment_button_id = "pl_QEyVU9sw9iwQJg";
-
-            console.log(buttonRef);
-
-            // Set loading handlers
-            script.onload = () => setIsRazorpayLoading(false);
-            script.onerror = () => setIsRazorpayLoading(false);
-
-            // Add event listener for Razorpay response
-            window.addEventListener('rzp.payment.success', handlePaymentResponse);
-            window.addEventListener('rzp.payment.failed', handlePaymentResponse);
-
-            buttonRef.current.innerHTML = '';
-            buttonRef.current.appendChild(script);
-  
-            return () => {
-                if (buttonRef.current?.contains(script)) {
-                    buttonRef.current.removeChild(script);
+        // Delay script loading by 5 seconds (5000ms)
+        const timeoutId = setTimeout(() => {
+            const handlePaymentResponse = (event) => {
+                console.log(event);
+                if (event.detail && event.detail.status === 'paid') {
+                    // Payment was successful
+                    onPaymentSuccess(event.detail);
+                } else {
+                    // Payment failed
+                    onPaymentFailure(event.detail || {});
                 }
-                // Clean up event listeners
-                window.removeEventListener('rzp.payment.success', handlePaymentResponse);
-                window.removeEventListener('rzp.payment.failed', handlePaymentResponse);
             };
-        }
+
+            if (buttonRef.current) {
+                const script = document.createElement('script');
+                script.src = "https://checkout.razorpay.com/v1/payment-button.js";
+                script.async = true;
+                script.dataset.payment_button_id = "pl_QEyVU9sw9iwQJg";
+
+                console.log(buttonRef);
+
+                // Set loading handlers
+                script.onload = () => setIsRazorpayLoading(false);
+                script.onerror = () => setIsRazorpayLoading(false);
+
+                // Add event listeners for Razorpay response
+                window.addEventListener('rzp.payment.success', handlePaymentResponse);
+                window.addEventListener('rzp.payment.failed', handlePaymentResponse);
+
+                // Remove any previous content (if needed) and attach the script
+                buttonRef.current.innerHTML = '';
+                buttonRef.current.appendChild(script);
+
+                // Cleanup function
+                return () => {
+                    if (buttonRef.current?.contains(script)) {
+                        buttonRef.current.removeChild(script);
+                    }
+                    window.removeEventListener('rzp.payment.success', handlePaymentResponse);
+                    window.removeEventListener('rzp.payment.failed', handlePaymentResponse);
+                };
+            }
+        }, 5000);
+
+        // Clear the timeout if component is unmounted
+        return () => clearTimeout(timeoutId);
     }, [onPaymentSuccess, onPaymentFailure]);
-  
+
     return isRazorpayLoading ? (
         <div>Loading payment button...</div>
     ) : (
-        <form ref={buttonRef}/>
+        <form ref={buttonRef} />
     );
 };
+
+
+// const RazorpayButton = ({ onPaymentSuccess, onPaymentFailure }) => {
+//     const buttonRef = useRef(null);
+//     const [isRazorpayLoading, setIsRazorpayLoading] = useState(false);
+  
+//     useEffect(() => {
+
+//         // console.log("payment ho rha hai");
+
+//         const handlePaymentResponse = (event) => {
+//             console.log(event);
+//             if (event.detail && event.detail.status === 'paid') {
+//                 // Payment was successful
+//                 onPaymentSuccess(event.detail);
+//             } else {
+//                 // Payment failed
+//                 onPaymentFailure(event.detail || {});
+//             }
+//         };
+
+//         if (buttonRef.current) {
+
+//             const script = document.createElement('script');
+//             script.src = "https://checkout.razorpay.com/v1/payment-button.js";
+//             script.async = true;
+//             script.dataset.payment_button_id = "pl_QEyVU9sw9iwQJg";
+
+//             console.log(buttonRef);
+
+//             // Set loading handlers
+//             script.onload = () => setIsRazorpayLoading(false);
+//             script.onerror = () => setIsRazorpayLoading(false);
+
+//             // Add event listener for Razorpay response
+//             window.addEventListener('rzp.payment.success', handlePaymentResponse);
+//             window.addEventListener('rzp.payment.failed', handlePaymentResponse);
+
+//             buttonRef.current.innerHTML = '';
+//             buttonRef.current.appendChild(script);
+  
+//             return () => {
+//                 if (buttonRef.current?.contains(script)) {
+//                     buttonRef.current.removeChild(script);
+//                 }
+//                 // Clean up event listeners
+//                 window.removeEventListener('rzp.payment.success', handlePaymentResponse);
+//                 window.removeEventListener('rzp.payment.failed', handlePaymentResponse);
+//             };
+//         }
+//     }, [onPaymentSuccess, onPaymentFailure]);
+  
+//     return isRazorpayLoading ? (
+//         <div>Loading payment button...</div>
+//     ) : (
+//         <form ref={buttonRef}/>
+//     );
+// };
 
 const CustomerProfile = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -300,7 +361,7 @@ const CustomerProfile = () => {
         let { name, value } = e.target;
         
         // Trim spaces for all input fields
-        value = value.trim();
+        // value = value.trim();
         
         // Apply phone number formatting
         if (name === "phone_number") {
@@ -382,11 +443,11 @@ const CustomerProfile = () => {
     }
 
     // Validate password length & complexity
-    // const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
-    // if (!passwordRegex.test(trimmedNewPassword)) {
-    //     showNotification('Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character', 'error');
-    //     return;
-    // }
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+    if (!passwordRegex.test(newPassword)) {
+        showNotification('Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character', 'error');
+        return;
+    }
 
     // Prevent using the same password again
     if (newPassword === currentPassword) {

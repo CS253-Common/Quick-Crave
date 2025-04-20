@@ -13,7 +13,7 @@ const CanteenStatistics = () => {
     // User data state for sidebar
     const [userData, setUserData] = useState({
         name: sessionStorage.getItem('name') || 'Canteen Manager',
-        email: sessionStorage.getItem('email') || 'manager@quickcrave.com'
+       username: sessionStorage.getItem('username')
     });
 
     // Active time frame state for order analytics
@@ -501,7 +501,7 @@ const CanteenStatistics = () => {
                         </Link>
                         <div className="cm-menu-user-details">
                             <h3 className="cm-menu-user-name">{userData.name}</h3>
-                            <p className="cm-menu-user-email">{userData.email}</p>
+                            <p className="cm-menu-user-email">{userData.username}</p>
                         </div>
                     </div>
                 </div>

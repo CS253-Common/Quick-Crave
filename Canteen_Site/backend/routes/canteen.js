@@ -68,6 +68,7 @@ router.post('/edit-password', authenticate, canteenController.editPassword);
 
 router.post('/edit-dish', authenticate, canteenController.editDish);
 router.post('/add-dish', authenticate, canteenController.addDish);
+router.post('/delete-dish', authenticate, canteenController.deleteDish);
 
 router.post('/get-statistics', authenticate, canteenController.getStatistics);
 router.post('/get-graphs', authenticate, canteenController.getGraphs);

@@ -22,16 +22,17 @@ const CanteenManagerProfile = () => {
     
     // User data state with default values
     const [userData, setUserData] = useState({
-        username: sessionStorage.getItem('username') || 'business_owner_69420',
-        name: sessionStorage.getItem('name') || 'Business Owner',
-        email: sessionStorage.getItem('email') || 'business@example.com',
+        username: sessionStorage.getItem('username'),
+        name: sessionStorage.getItem('name'),
+        email: sessionStorage.getItem('email'),
         img_url: sessionStorage.getItem('img_url')||'/images/business_avatar.png',
         address: sessionStorage.getItem('address')||'Not specified',
         opening_time: sessionStorage.getItem('opening_time')||'08:00',
         closing_time: sessionStorage.getItem('closing_time')||'18:00',
         opening_status: sessionStorage.getItem('opening_status')||true,
         auto_accept: sessionStorage.getItem('auto_accept')|| false,
-        delivery_available: sessionStorage.getItem('delivery_available')||true
+        delivery_available: sessionStorage.getItem('delivery_available')||true,
+        phone_number : sessionStorage.getItem('delivery_available')|| 1234567890
     });
 
     // Fetch user profile data on component mount
@@ -44,24 +45,25 @@ const CanteenManagerProfile = () => {
                 
                 // Transform the API response to match our state structure
                 const transformedData = {
-                    username: profileData.username || 'johnsmith',
-                    name: profileData.name || 'John Smith',
-                    role: profileData.role || 'Canteen Manager',
-                    profileImage: profileData.img_url || profileData.profile_image || '/images/business_avatar.png',
-                    img_url: profileData.img_url || profileData.profile_image || '/images/business_avatar.png',
+                    username: profileData.username,
+                    name: profileData.name,
+                    role: 'Canteen Manager',
+                    profileImage: profileData.img_url || '/images/business_avatar.png',
+                    img_url: profileData.img_url  || '/images/business_avatar.png',
                     address: profileData.address || 'Not specified',
                     opening_time: profileData.opening_time || '08:00',
                     closing_time: profileData.closing_time || '18:00',
                     opening_status: profileData.opening_status !== undefined ? profileData.opening_status : true,
                     auto_accept: profileData.auto_accept !== undefined ? profileData.auto_accept : false,
-                    delivery_available: profileData.delivery_available !== undefined ? profileData.delivery_available : true
+                    delivery_available: profileData.delivery_available !== undefined ? profileData.delivery_available : true,
+                    phone_number: profileData.phone_number
                 };
                 
                 setUserData(transformedData);
                 
                 // Save basic user info to session storage
-                sessionStorage.setItem('name', transformedData.name);
-                sessionStorage.setItem('username', transformedData.username);
+                // sessionStorage.setItem('name', transformedData.name);
+                // sessionStorage.setItem('username', transformedData.username);
             } catch (err) {
                 console.error('Error fetching user profile:', err);
                 setError('Failed to load profile data. Please refresh the page.');
@@ -316,7 +318,7 @@ const CanteenManagerProfile = () => {
                                 <i className="fas fa-phone" style={{marginRight: '8px', color: '#ff5252'}}></i>
                                 Phone
                             </div>
-                            <div className="field-value">{userData.phone || 'Not specified'}</div>
+                            <div className="field-value">{userData.phone_number || 'Not specified'}</div>
                         </div>
                     </div>
 

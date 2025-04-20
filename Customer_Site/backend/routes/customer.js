@@ -9,7 +9,7 @@ const authenticate = require('../middleware/authenticate.js')
 // router.post('/customer-home-dish-search' , customerController.searchDish) ; 
 router.post('/customer-search-canteen' ,authenticate,customerController.searchCanteen ) ; // done
 router.post('/customer-search-dish' ,authenticate, customerController.searchDish ) ; // done
-router.post('/customer-fetch-reservations' ,authenticate, customerController.fetchReservations ); // done 
+router.post('/customer-fetch-reservations' , authenticate, customerController.fetchReservations ); // done 
 router.post('/customer-add-dish' ,authenticate, customerController.addDishToCart ) ; // done 
 router.post('/customer-remove-dish' ,authenticate, customerController.removeDishFromCart ) ; // done
 router.post('/customer-view-order-history' ,authenticate,customerController.viewOrderHistory ) ; // done

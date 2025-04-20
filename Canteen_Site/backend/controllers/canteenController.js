@@ -173,7 +173,7 @@ exports.getMenuItems = async (req, res) => {
     const canteen_id = req.canteen_id;
 
     try {
-        const response = await db.query('SELECT * FROM DISHES WHERE canteen_id = $1;', [canteen_id]);
+        const response = await db.query('SELECT * FROM dishes WHERE canteen_id = $1 AND is_active = TRUE;', [canteen_id]);
         return res.status(200).json({ message: 'Menu sent', menu: response.rows });
     }
     catch (err) {
@@ -224,7 +224,7 @@ exports.getActiveDiscounts = async (req, res) => {
     const canteen_id = req.canteen_id;
 
     try {
-        const response = await db.query(`SELECT * FROM dishes WHERE canteen_id = $1 AND discount > 0;`, [canteen_id]);
+        const response = await db.query(`SELECT * FROM dishes WHERE canteen_id = $1 AND discount > 0 AND is_active = TRUE;`, [canteen_id]);
         // console.log(response.rows.length);
         // console.log("sdgsgs")
         // console.log(canteen_id)
@@ -292,14 +292,15 @@ exports.getTrendingPicks = async (req, res) => {
             SELECT d.dish_name, t.dish_id, t.total_quantity, d.img_url
             FROM (
     SELECT key AS dish_id, SUM(value::int) AS total_quantity
-    FROM orders, jsonb_each_text(dishes)
+    FROM orders, jsonb_each_text(dish_map)
     WHERE canteen_id = $1
       AND time >= NOW() - INTERVAL '7 days'
     GROUP BY key
     ORDER BY total_quantity DESC
     LIMIT 5
 ) AS t
-JOIN dishes d ON d.dish_id = t.dish_id::int;
+JOIN dishes d ON d.dish_id = t.dish_id::int
+WHERE d.is_active = TRUE;
             `, [canteen_id]);
 
         return res.status(200).json({ message: 'Trending Picks Sent', trending_picks: response.rows });
@@ -443,8 +444,10 @@ exports.editProfileInfo = async (req, res) => {
             opening_status = $5,
             auto_accept = $6,
             address = $7,
-            img_url = $8
-            WHERE canteen_id = $1;`, [canteen_id, canteen.name, canteen.opening_time, canteen.closing_time, canteen.opening_status, canteen.auto_accept,canteen.address, canteen.img_url]);
+            img_url = $8,
+            delivery_available = $9
+            WHERE canteen_id = $1;
+            `, [canteen_id, canteen.name, canteen.opening_time, canteen.closing_time, canteen.opening_status, canteen.auto_accept,canteen.address, canteen.img_url,canteen.delivery_available]);
 
     if(!(canteen.username === undefined || canteen.username.length === 0)){
         const temp = await db.query(`
@@ -459,7 +462,7 @@ exports.editProfileInfo = async (req, res) => {
             return res.status(200).json({ message: 'Profile Information Sent' });
         }
         else {
-            return res.status[201].json({ message: 'Username already exists. Other changes updated' });
+            return res.status(201).json({ message: 'Username already exists. Other changes updated' });
         }
     }
     return res.status(200).json({ message: 'Profile Information Sent' });
@@ -625,7 +628,7 @@ exports.getStatistics = async(req,res) => {
 
         const delta = {
             sales : row_1.total_sales -  row_2.total_sales,
-            order : row_1.total_orders - row_2.total_orders,
+            orders : row_1.total_orders - row_2.total_orders,
             avg_order_value : row_1.avg_order_value - row_2.avg_order_value,
             customers : row_1.total_customers - row_2.total_customers
         };

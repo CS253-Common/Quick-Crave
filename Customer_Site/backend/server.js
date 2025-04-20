@@ -185,6 +185,7 @@ const PORT = process.env.PORT || 4000;
 // ✅ Razorpay Webhook Route (must be before express.json())
 app.use("/razorpay-webhook", express.raw({ type: "application/json" }), razorpayRoutes);
 
+const allowed_origins = ["http://localhost:3000"];
 
 // ✅ Middleware
 app.use(cors({

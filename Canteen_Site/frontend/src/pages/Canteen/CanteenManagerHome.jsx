@@ -21,8 +21,8 @@ const customStyles = `
 const CanteenManagerHome = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [userData, setUserData] = useState({
-        name: sessionStorage.getItem('user_name') || 'Business Owner',
-        email: sessionStorage.getItem('user_email') || 'business@example.com'
+        username: sessionStorage.getItem('username') || 'Business Owner',
+        name: sessionStorage.getItem('name') || 'Business Owner'
     });
     
     // States for dashboard data
@@ -55,13 +55,13 @@ const CanteenManagerHome = () => {
 
     // Use useEffect to load user data and dashboard data when component mounts
     useEffect(() => {
-        const userName = sessionStorage.getItem('user_name');
-        const userEmail = sessionStorage.getItem('user_email');
+        const username = sessionStorage.getItem('username');
+        const name = sessionStorage.getItem('name');
         
-        if (userName && userEmail) {
+        if (username && name) {
             setUserData({
-                name: userName,
-                email: userEmail
+                name: name,
+                username: username
             });
         }
         
@@ -203,7 +203,7 @@ const CanteenManagerHome = () => {
                         </Link>
                         <div className="cm-menu-user-details">
                             <h3 className="cm-menu-user-name">{userData.name}</h3>
-                            <p className="cm-menu-user-email">{userData.email}</p>
+                            <p className="cm-menu-user-email">{userData.username}</p>
                         </div>
                     </div>
                 </div>

@@ -10,8 +10,8 @@ const DiscountManagement = () => {
     
     // User data state
     const [userData, setUserData] = useState({
-        name: 'Canteen Manager',
-        email: 'manager@quickcrave.com'
+        name: sessionStorage.getItem('name'),
+        username: sessionStorage.getItem('username')
     });
     
     // State variables for form inputs
@@ -49,15 +49,15 @@ const DiscountManagement = () => {
     const canteenId = 1; // Replace with actual canteen ID from context
     
     // Load user data from session storage
-    useEffect(() => {
-        const userInfo = JSON.parse(sessionStorage.getItem('userInfo')) || {};
-        if (userInfo && Object.keys(userInfo).length > 0) {
-            setUserData({
-                name: userInfo.name || 'Canteen Manager',
-                email: userInfo.email || 'manager@quickcrave.com'
-            });
-        }
-    }, []);
+    // useEffect(() => {
+    //     const userInfo = JSON.parse(sessionStorage.getItem('userInfo')) || {};
+    //     if (userInfo && Object.keys(userInfo).length > 0) {
+    //         setUserData({
+    //             name: userInfo.name || 'Canteen Manager',
+    //             email: userInfo.email || 'manager@quickcrave.com'
+    //         });
+    //     }
+    // }, []);
     
     // Toggle menu function
     const toggleMenu = () => {
@@ -415,7 +415,7 @@ const DiscountManagement = () => {
                         </Link>
                         <div className="menu-user-details">
                             <h3 className="menu-user-name">{userData.name}</h3>
-                            <p className="menu-user-email">{userData.email}</p>
+                            <p className="menu-user-email">{userData.username}</p>
                         </div>
                     </div>
                 </div>

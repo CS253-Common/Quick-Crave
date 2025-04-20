@@ -14,8 +14,8 @@ const OrderQueue = () => {
     
     // Sample user data
     const userData = {
-        name: sessionStorage.getItem('user_name') || 'John Manager',
-        email: sessionStorage.getItem('user_email') || 'john@example.com'
+        name: sessionStorage.getItem('name') || 'John Manager',
+        username: sessionStorage.getItem('username')
     };
 
     // Filter state
@@ -271,7 +271,7 @@ const OrderQueue = () => {
         });
         
         // Set interval to fetch every 30 seconds
-        const intervalId = setInterval(fetchOrders, 300000);
+        const intervalId = setInterval(fetchOrders, 30000);
         
         // Clear interval on component unmount
         return () => clearInterval(intervalId);
@@ -299,7 +299,7 @@ const OrderQueue = () => {
                         </Link>
                         <div className="cm-menu-user-details">
                             <h3 className="cm-menu-user-name">{userData.name}</h3>
-                            <p className="cm-menu-user-email">{userData.email}</p>
+                            <p className="cm-menu-user-email">{userData.username}</p>
                         </div>
                     </div>
                 </div>

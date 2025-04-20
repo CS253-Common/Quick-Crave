@@ -114,7 +114,7 @@ exports.login = async (req, res) => {
           });
       } else if (userType === 'canteen-manager') {
 
-          const canteenQuery = `SELECT canteen_id, password, name, opening_time, closing_time, opening_status, rating, phone_number, email, auto_accept FROM canteens WHERE username = $1;`;
+          const canteenQuery = `SELECT address,img_url, canteen_id, password, name, opening_time, closing_time, opening_status, rating, phone_number, email, auto_accept FROM canteens WHERE username = $1;`;
           const canteen = await db.query(canteenQuery, [username]);
 
           if (canteen.rows.length === 0) {
@@ -143,7 +143,9 @@ exports.login = async (req, res) => {
               phone_number: canteen.rows[0].phone_number,
               email: canteen.rows[0].email,
               auto_accept: canteen.rows[0].auto_accept,
-              token: jwt_token
+              token: jwt_token,
+              address:canteen.rows[0].address,
+              img_url:canteen.rows[0].img_url
           });
       } else {
           return res.status(400).json({ message: 'Invalid user type' });

@@ -41,9 +41,8 @@ const ReservationManagement = () => {
     
     // User data state for sidebar
     const [userData, setUserData] = useState({
-        name: sessionStorage.getItem('user_name') || 'Canteen Manager',
-        email: sessionStorage.getItem('user_email') || 'manager@quickcrave.com',
-        username: sessionStorage.getItem('user_username') || 'canteen_manager'
+        name: sessionStorage.getItem('name'),
+        username: sessionStorage.getItem('username')
     });
     
     // Toggle menu
@@ -409,7 +408,7 @@ const ReservationManagement = () => {
                         </Link>
                         <div className="cm-menu-user-details">
                             <h3 className="cm-menu-user-name">{userData.name}</h3>
-                            <p className="cm-menu-user-email">{userData.email}</p>
+                            <p className="cm-menu-user-email">{userData.username}</p>
                         </div>
                     </div>
                 </div>
@@ -496,16 +495,6 @@ const ReservationManagement = () => {
                         </div>
                         <div className="stat-icon rejected-icon">
                             <FaTimes />
-                        </div>
-                    </div>
-                    
-                    <div className="stat-card">
-                        <div className="stat-info">
-                            <h3>Total Tables</h3>
-                            <span className="stat-value">{stats.totalTables}</span>
-                        </div>
-                        <div className="stat-icon tables-icon">
-                            <FaTable />
                         </div>
                     </div>
                 </div>

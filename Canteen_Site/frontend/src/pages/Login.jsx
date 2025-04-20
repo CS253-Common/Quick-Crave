@@ -45,17 +45,11 @@ const Login = () => {
                 // sessionStorage.setItem('JWT_TOKEN' , result.data.token) ;
                 sessionStorage.setItem('img_url',result.data.img_url);
                 sessionStorage.setItem('address',result.data.address);
-
-                if(form.userType==='customer'){
-                    sessionStorage.setItem('wallet_balance',0) ;
-                }
-                else{
-                    sessionStorage.setItem('opening_time',result.data.opening_time)
-                    sessionStorage.setItem('closing_time' , result.data.closing_time) 
-                    sessionStorage.setItem('opening_status',result.data.opening_status)
-                    sessionStorage.setItem('rating',result.data.rating)
-                    sessionStorage.setItem('auto_accept',result.data.auto_accept)
-                }
+                sessionStorage.setItem('opening_time',result.data.opening_time)
+                sessionStorage.setItem('closing_time' , result.data.closing_time) 
+                sessionStorage.setItem('opening_status',result.data.opening_status)
+                sessionStorage.setItem('rating',result.data.rating)
+                sessionStorage.setItem('auto_accept',result.data.auto_accept)
             // For demo purposes, we'll just show a success message
             alert(`Login successful as ${form.userType}!`);
     

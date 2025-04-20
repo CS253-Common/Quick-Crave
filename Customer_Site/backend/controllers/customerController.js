@@ -137,7 +137,9 @@ exports.searchDish = async (req, res) => {
 exports.fetchReservations = async (req, res) => {
     try {
         // const { customer_id } = req.body;
+        console.log("RESERVATION HISTORY") ; 
         const customer_id = req.customer_id ; 
+        console.log(customer_id) ; 
         
         if (!customer_id) {
             return res.status(400).json({ message: "Customer ID is required" });
@@ -145,12 +147,23 @@ exports.fetchReservations = async (req, res) => {
 
         // Query to fetch reservations for the customer
         const query = `
-            SELECT r.reservation_id, r.status, c.name, r.reservation_time AS time, r.num_people
+                SELECT 
+                r.reservation_id, 
+                r.status, 
+                r.reservation_time AS time, 
+                r.num_people,
+                c.name, 
+                c.img_url, 
+                c.rating,
+                c.address
             FROM reservations r
             JOIN canteens c ON r.canteen_id = c.canteen_id
             WHERE r.customer_id = $1;
+      
         `;
         const { rows } = await db.query(query, [customer_id]);
+
+        console.log(rows) ; 
         // //.log(rows) ; 
         return res.status(200).json({ reservations: rows });
     } catch (error) {
@@ -595,6 +608,8 @@ exports.viewFavourites = async (req, res) => {
         // const { customer_id } = req.body;
         const customer_id = req.customer_id ;
 
+        // console.log(customer_id) ; 
+
         //.log(customer_id) ; 
 
         if (!customer_id) {
@@ -622,7 +637,7 @@ exports.viewFavourites = async (req, res) => {
 
         return res.status(200).json({data: rows,success:true});
     } catch (error) {
-        //.error("Error fetching customer favorites:", error);
+        console.error("Error fetching customer favorites:", error);
         return res.status(500).json({ error: "Internal Server Error" ,success:false});
     }
 };
@@ -745,19 +760,26 @@ exports.updateWallet = async (req, res) => {
 
 exports.addReservations = async (req,res) => {
     try {
-        const {canteen_id, num_people, reservation_time } = req.body;
+        // console.log("RSERve") ; 
+        const {canteen_id, num_people, date,time, additional_requests} = req.body;
         const customer_id = req.customer_id ;
+
+        const reservation_time = `${date} ${time}`;
+        
         //.log(req.body) ; 
         //.log(customer_id, canteen_id, num_people, reservation_time );
         // const tmep =   ;
         
-        if(!customer_id || !canteen_id || !num_people || !reservation_time || parseInt(num_people) <= 0 ){
+        if(!customer_id || !canteen_id || !num_people || !reservation_time || parseInt(num_people) <= 0){
             return res.status(401).json({
                 message:'Data got corrupted in between',
                 success:false
             });
         }
         
+        // if(!additional_requests){
+            
+        // }
         //.log('Before query 1');
 
         const balance_query = `select wallet_balance from customers where customer_id = $1`;
@@ -770,14 +792,28 @@ exports.addReservations = async (req,res) => {
 
         //.log('Before query 2');
 
-        const reservation_query = `INSERT INTO reservations (customer_id, canteen_id, request_time, reservation_time, num_people, status) 
-        VALUES ($1, $2, NOW(), $3, $4, $5) returning reservation_id;`;
+    //     reservation_id      | integer                     |           | not null | nextval('reservations_reservation_id_seq'::regclass)
+    //     customer_id         | integer                     |           |          | 
+    //     canteen_id          | integer                     |           |          | 
+    //     request_time        | timestamp without time zone |           |          | 
+    //     reservation_time    | timestamp without time zone |           |          | 
+    //     num_people          | integer                     |           |          | 
+    //     status              | integer                     |           |          | 
+    //     reservation_amount  | real                        |           |          | 
+    //     additional_requests | character varying(50)       |           |          | 
+    //    Indexes:
+       
+    console.log("HI") ; 
+
+        const reservation_query = `INSERT INTO reservations (customer_id, canteen_id, request_time, reservation_time, 
+        num_people, status,reservation_amount,additional_requests) 
+        VALUES ($1, $2, NOW(), $3, $4, $5, $6, $7) returning reservation_id;`;
         
 
         //.log("Before query 2.5") ; 
         //.log(reservation_time);
 
-        const reservation_result = await db.query(reservation_query,[customer_id,canteen_id,reservation_time,num_people,1]) ; 
+        const reservation_result = await db.query(reservation_query,[customer_id,canteen_id,reservation_time,num_people,1,num_people*10,additional_requests]) ; 
 
         //.log("Before query 2.75") ; 
         
@@ -801,6 +837,7 @@ exports.addReservations = async (req,res) => {
         const transaction_query = `INSERT INTO transactions (order_id , customer_id, time, amount) VALUES ($1,$2,NOW(),$3) returning transaction_id;`;
         const transaction_result = await db.query(transaction_query, [0,customer_id,10*num_people]);
 
+        console.log("HI") ; 
         return res.status(200).json({
             message:'Everything done',
             transaction_id : transaction_result.rows[0].transaction_id,
@@ -939,6 +976,7 @@ exports.fetchTop5 =  async(req,res) => {
             d.order_count
         FROM dishes d
         JOIN canteens c ON d.canteen_id = c.canteen_id
+        WHERE d.is_active = TRUE
         ORDER BY d.order_count DESC
         LIMIT 5;
            ` ;
@@ -1144,16 +1182,16 @@ exports.fetchDishes = async (req, res) => {
         const query = `
             SELECT d.dish_name, d.img_url, c.name AS canteen_name, d.price, d.is_veg, d.rating, d.dish_id
             FROM dishes d
-            JOIN canteens c ON d.canteen_id = c.canteen_id;
+            JOIN canteens c ON d.canteen_id = c.canteen_id
+            WHERE d.is_active = true;
         `;
         const result = await db.query(query);
         res.json(result.rows);
     } catch (error) {
-        //.error("Error fetching dishes:", error);
+        // console.error("Error fetching dishes:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
-
 
 exports.fetchCanteens = async (req, res) => {
     //.log("mianaagayag") ; 
@@ -1182,7 +1220,8 @@ exports.fetchMenu = async (req, res) => {
             SELECT d.dish_name, d.img_url, d.rating, d.price, d.is_veg, d.dish_id, d.dish_tag
             FROM dishes d
             JOIN canteens c ON c.canteen_id = $1
-            WHERE d.dish_id = ANY(c.menu);
+            WHERE d.dish_id = ANY(c.menu)
+            AND d.is_active = true;
         `;
 
         const { rows } = await db.query(query, [canteen_id]);

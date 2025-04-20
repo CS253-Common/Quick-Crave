@@ -96,6 +96,10 @@ const CustomerHome = ({setSelectedCanteen}) => {
         }
     }
 
+    const handleProfileNavigation = () => {
+        navigate("/customer-profile");
+    }
+
     //ERROR OVER
     return (
         <div className="home-container home-page"> {/* Removed onLoad attribute */}
@@ -162,10 +166,12 @@ const CustomerHome = ({setSelectedCanteen}) => {
                   </h1>
               </div>
             </Link>
-                    <div className="user-profile">
-                        <Link to="/customer-profile" className="user-avatar" id="userAvatar">
+                    <div className="user-profile" onClick={handleProfileNavigation}>
+                        {/* <Link to="/customer-profile" className="user-avatar" id="userAvatar"> */}
+                        <div className="user-avatar" id="userAvatar">
                             <img src={sessionStorage.getItem('img_url')} alt="User Avatar" onError={(e) => { e.target.onerror = null; e.target.src = '/images/user_default.png' }} />
-                        </Link>
+                        </div>
+                        {/* </Link> */}
                     </div>
                 </div>
 

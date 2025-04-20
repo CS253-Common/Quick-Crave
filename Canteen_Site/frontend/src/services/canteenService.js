@@ -863,12 +863,13 @@ const canteenService = {
 
       // Prepare data for API - transform field names if needed
       const apiData = {
-        name: menuItemData.name,
+        dish_id:itemId,
+        dish_name: menuItemData.dish_name,
         dish_tag: menuItemData.dish_tag,
         price: menuItemData.price,
         discount: menuItemData.discount,
         // rating: menuItemData.rating,
-        dish_category: menuItemData.category_tag,
+        dish_category: menuItemData.dish_category,
         is_veg: menuItemData.is_veg,
         status: menuItemData.status | image_url,
       };
@@ -910,7 +911,7 @@ const canteenService = {
   deleteMenuItem: async (itemId) => {
     try {
       const response = await axios.post(
-        `${API_URL}/canteen/menu-items/delete-dish`,
+        `${API_URL}/canteen/delete-dish`,
         { dish_id: itemId }
       );
       console.log("Menu item deleted successfully");
@@ -955,6 +956,7 @@ const canteenService = {
         opening_status: true,
         auto_accept: false,
         delivery_available: true,
+        phone_number: 1234567890
       };
     }
   },
@@ -1087,14 +1089,7 @@ const canteenService = {
   getRecentOrders: async () => {
     try {
       const response = await axios.post(
-        `${API_URL}/canteen/orders/recent`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("auth_token")}`,
-          },
-        }
-      );
+        `${API_URL}/canteen/order-queue`);
       return response.data;
     } catch (error) {
       console.error("Error fetching recent orders:", error);
@@ -1178,7 +1173,7 @@ const canteenService = {
       const response = await axios.post(`${API_URL}/canteen/trending-picks`);
       const data = response.data;
       console.log("Trending picks response:", data);
-      console.log(data.trending_picks[4].img_url);
+      // console.log(data.trending_picks[4].img_url);
       return {
         items: data.trending_picks || [],
         message: data.message,

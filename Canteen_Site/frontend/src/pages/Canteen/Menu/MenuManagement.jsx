@@ -16,9 +16,8 @@ const MenuManagement = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     // const [canteenId, setCanteenId] = useState(sessionStorage.getItem('canteen_id') || '1'); // Default to 1 if not found
     const userData = {
-        name: sessionStorage.getItem('user_name') || 'John Manager',
-        email: sessionStorage.getItem('user_email') || 'john@example.com',
-        username: sessionStorage.getItem('user_username') || 'john_manager'
+        name: sessionStorage.getItem('name') || 'John Manager',
+        username: sessionStorage.getItem('username') || 'john_manager'
     };
     // Menu items state
     const [menuItems, setMenuItems] = useState([]);
@@ -194,6 +193,7 @@ const MenuManagement = () => {
                     // First try to determine from name
                     item.dish_category = 'Uncategorized';
                 }
+                // if(items.is_available)
                 return item;
             });
             
@@ -328,7 +328,7 @@ const MenuManagement = () => {
             // Close modal
             setIsEditModalOpen(false);
             setCurrentItem(null);
-            
+            fetchMenuItems(); // reloads all items from backend
             return true; // Return success status
         } catch (err) {
             console.error('Error updating item:', err);
@@ -418,7 +418,6 @@ const MenuManagement = () => {
                         </Link>
                         <div className="cm-menu-user-details">
                             <h3 className="cm-menu-user-name">{userData.name}</h3>
-                            <h3 className="cm-menu-user-email">{userData.email}</h3>
                             <h5 className='cm-menu-user-username'>{userData.username}</h5>
                         </div>
                     </div>

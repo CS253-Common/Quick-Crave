@@ -113,7 +113,7 @@ const EditItemModal = ({ isOpen, onClose, onSave, item }) => {
         if (validateForm()) {
             // Create an updated menu item object
             const updatedItem = {
-                id: item.id, // Keep the original ID
+                dish_id: item.dish_id, // Keep the original ID
                 dish_name: formData.dish_name,
                 dish_tag: formData.dish_tag,
                 price: formData.price,
@@ -123,7 +123,7 @@ const EditItemModal = ({ isOpen, onClose, onSave, item }) => {
                 status: formData.status,
                 imageFile: selectedImage // Pass the actual File object if a new image was selected
             };
-            
+            console.log(updatedItem);
             // If no new image was selected but we have a preview URL
             // (which could be the original image), use that URL
             if (!selectedImage && previewUrl) {
@@ -174,9 +174,8 @@ const EditItemModal = ({ isOpen, onClose, onSave, item }) => {
                                 <label htmlFor="name">Item Name*</label>
                                 <input
                                     type="text"
-                                    id="name"
-                                    name="name"
-                                    value={formData.name}
+                                    name="dish_name"
+                                    value={formData.dish_name}
                                     onChange={handleChange}
                                     className={errors.name ? 'error' : ''}
                                 />

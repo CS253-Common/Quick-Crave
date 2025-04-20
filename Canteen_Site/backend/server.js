@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 4001;
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3001', // ✅ Your frontend origin
+  origin:'http://localhost:3001', // ✅ Your frontend origin
   credentials: true                // ✅ Required for cookies
 }));
 // DHS start

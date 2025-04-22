@@ -282,7 +282,9 @@ CREATE TABLE dishes (
   dish_tag VARCHAR(30),
   is_veg BOOLEAN,
   img_url VARCHAR(500),
-  dish_category VARCHAR(20)
+  dish_category VARCHAR(20),
+  is_active BOOLEAN DEFAULT TRUE,
+  is_available BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE orders (
@@ -299,8 +301,6 @@ CREATE TABLE orders (
   is_delivery BOOLEAN,
   dish_map JSONB,
   delivery_address VARCHAR(50),
-  is_active BOOLEAN,
-  dish_category VARCHAR(20)
 );
 
 CREATE TABLE reservations (
@@ -312,7 +312,8 @@ CREATE TABLE reservations (
   num_people INTEGER,
   status INTEGER,
   reservation_amount REAL,
-  additional_requests VARCHAR(50)
+  additional_request VARCHAR(100),
+  payment_id VARCHAR(100)
 );
 
 CREATE TABLE transactions (
@@ -325,7 +326,7 @@ CREATE TABLE transactions (
 
 CREATE TABLE coupons (
   coupon_id SERIAL PRIMARY KEY,
-  coupon_code VARCHAR(8),
+  coupon_code VARCHAR(20),
   canteen_id INTEGER,
   discount_value REAL,
   min_order_value REAL,
